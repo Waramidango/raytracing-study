@@ -27,7 +27,7 @@ class hittable {
         // オブジェクトが破棄されるときに自動で呼ばれる関数　デストラクタ
         virtual ~hittable() = default;
 
-        virtual bool hit(const ray& r, double ray_tmin, double ray_tmax, hit_record& rec) const = 0;
+        virtual bool hit(const ray& r, interval ray_t, hit_record& rec) const = 0;
 };
 
 #endif
