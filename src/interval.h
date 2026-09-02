@@ -23,6 +23,12 @@ class interval {
             return min < x && x < max;
         }
 
+        double clamp(double x) const {
+            if (x < min) return min;
+            if (x > max) return max;
+            return x;
+        }
+
         // クラス全体でinterval型のオブジェクト emptyとuniverseを持つ
         static const interval empty, universe;
 };
