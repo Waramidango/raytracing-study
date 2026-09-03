@@ -120,14 +120,16 @@ inline vec3 unit_vector(const vec3& v) {
 
 inline vec3 random_unit_vector() {
     while (true) {
+        // 各要素が-1～1のランダムな値のベクトルを生成
         auto p = vec3::random(-1,1);
+        // 各要素を二乗した値の和（全ての要素が1以下の場合1以下）
         auto lensq = p.length_squared();
         if (1e-160 < lensq && lensq <= 1)
             return p / sqrt(lensq);
     }
 }
 
-inline vec3 random_on_hemisphere(const vec3& normal) {
+inline vec3 random_on_hemisphere(const vec3& normal) { // ランダムな反射ベクトルを返す
     vec3 on_unit_sphere = random_unit_vector();
     if(dot(on_unit_sphere, normal) > 0.0) // In the same hemisphere as the normal
         return on_unit_sphere;
