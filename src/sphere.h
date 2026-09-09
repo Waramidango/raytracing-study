@@ -8,7 +8,8 @@ class sphere : public hittable{
     public:
         // コンストラクタ　引数として中心座標と半径を渡す
         // std::fmax(0,radius) 0かradiusの大きいほう（半径を負の数にならないようにしている）
-        sphere(const point3& center, double radius) : center(center), radius(std::fmax(0,radius)) {}
+        sphere(const point3& center, double radius, shared_ptr<material> mat)
+        : center(center), radius(std::fmax(0,radius)), mat(mat) {}
 
         bool hit(const ray& r, interval ray_t, hit_record& rec) const override {
             vec3 oc = center - r.origin();
@@ -37,6 +38,7 @@ class sphere : public hittable{
             rec.p = r.at(rec.t);
             vec3 outward_normal = (rec.p - center) / radius;
             rec.set_face_normal(r, outward_normal);
+            rec.mat = mat; // material
 
             return true;
         }
@@ -44,6 +46,7 @@ class sphere : public hittable{
     private:
         point3 center;
         double radius;
+        shared_ptr<material> mat;
 };
 
 #endif

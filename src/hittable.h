@@ -3,11 +3,14 @@
 
 // #include "ray.h"
 
+class material;
+
 // レイが衝突した結果を保存する
 class hit_record {
     public:
         point3 p; // 衝突した場所
         vec3 normal; // 衝突地点の法線ベクトル
+        shared_ptr<material> mat; // materialクラスのスマートポインタ
         double t;
         bool front_face; // 表面から衝突したかどうか
 
